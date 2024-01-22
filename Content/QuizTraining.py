@@ -80,7 +80,7 @@ def draw(st):
     st.write("The problem here again only has 2 inputs and 1 output. The architecture input below only takes values for the hidden layers")
     collect_numbers = lambda x : [min(32,int(i)) for i in re.split("[^0-9]", x) if i != ""]
 
-    EXTRA_SEED = st.number_input("Extra seed")
+    EXTRA_SEED = int(st.number_input("Extra seed"))
 
     input_text = st.text_input("What hidden layer architecture do you want to use = [2,2]")
     if(input_text):
