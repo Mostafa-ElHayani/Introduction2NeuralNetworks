@@ -11,7 +11,7 @@ def generate_data(dataset_type,random_seed, separation):
         is_regression = True
     elif dataset_type == 'classification':
         if(separation is None):
-            X, y = make_classification(n_samples=np.random.randint(100,500), n_features=2, n_informative=2, n_redundant=0,class_sep=np.random.randint(0,2))
+            X, y = make_classification(n_samples=np.random.randint(100,500), n_features=2, n_informative=2, n_redundant=0,class_sep=np.random.randint(0.1,2.0))
         else:
             X, y = make_classification(n_samples=np.random.randint(100,500), n_features=2, n_informative=2, n_redundant=0,class_sep=separation)
         is_regression = False

@@ -14,9 +14,9 @@ SEED_2 = 512
 
 def generate_data():
 
-    X1, y1 = make_classification(n_samples=2000, n_features=2, n_informative=2, n_redundant=0, class_sep=2, random_state=SEED_1)
-    X2, y2 = make_classification(n_samples=2000, n_features=2, n_informative=2, n_redundant=0, class_sep=1, random_state=SEED_2)
-    X3, y3 = make_classification(n_samples=200, n_features=2, n_informative=2, n_redundant=0, class_sep=0, random_state=SEED_2)
+    X1, y1 = make_classification(n_samples=2000, n_features=2, n_informative=2, n_redundant=0, class_sep=1.6, random_state=SEED_1)
+    X2, y2 = make_classification(n_samples=2000, n_features=2, n_informative=2, n_redundant=0, class_sep=0.9, random_state=SEED_2)
+    X3, y3 = make_classification(n_samples=200, n_features=2, n_informative=2, n_redundant=0, class_sep=0.1, random_state=SEED_2)
     X = np.concatenate([X1,X2,X3])
     y = np.concatenate([y1,y2,y3])
 
