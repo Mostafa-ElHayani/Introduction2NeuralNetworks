@@ -12,15 +12,18 @@ SEED = 53
 SEED_1 = 32
 SEED_2 = 512
 
-def generate_data():
+EXTRA_SEED = 0
 
-    X1, y1 = make_classification(n_samples=2000, n_features=2, n_informative=2, n_redundant=0, class_sep=1.6, random_state=SEED_1)
-    X2, y2 = make_classification(n_samples=2000, n_features=2, n_informative=2, n_redundant=0, class_sep=0.9, random_state=SEED_2)
-    X3, y3 = make_classification(n_samples=200, n_features=2, n_informative=2, n_redundant=0, class_sep=0.1, random_state=SEED_2)
+def generate_data():
+    global EXTRA_SEED
+
+    X1, y1 = make_classification(n_samples=2000, n_features=2, n_informative=2, n_redundant=0, class_sep=1.6, random_state=SEED_1 + EXTRA_SEED)
+    X2, y2 = make_classification(n_samples=2000, n_features=2, n_informative=2, n_redundant=0, class_sep=0.9, random_state=SEED_2 + EXTRA_SEED)
+    X3, y3 = make_classification(n_samples=200, n_features=2, n_informative=2, n_redundant=0, class_sep=0.1, random_state=SEED_2 + EXTRA_SEED)
     X = np.concatenate([X1,X2,X3])
     y = np.concatenate([y1,y2,y3])
 
-    X_train, X_test, y_train, y_test = train_test_split( X, y, test_size=0.8, random_state=SEED)
+    X_train, X_test, y_train, y_test = train_test_split( X, y, test_size=0.85, random_state=SEED + EXTRA_SEED)
     np.random.seed(SEED)
     val = 1
     noise = np.random.uniform(-val,val, X_test.shape)
@@ -72,8 +75,13 @@ def train_and_visualize_model(epochs, hidden_layers, X_train, y_train, X_test, y
     st.write(f"Testing Accuracy: {accuracy_score(y_test, ytest_pred):.2f}")
 
 def draw(st):
+    global EXTRA_SEED
+
     st.write("The problem here again only has 2 inputs and 1 output. The architecture input below only takes values for the hidden layers")
     collect_numbers = lambda x : [min(32,int(i)) for i in re.split("[^0-9]", x) if i != ""]
+
+    EXTRA_SEED = st.number_input("Extra seed")
+
     input_text = st.text_input("What hidden layer architecture do you want to use = [2,2]")
     if(input_text):
         hidden_layers = collect_numbers(input_text)
